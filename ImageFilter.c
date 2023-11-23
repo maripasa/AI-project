@@ -28,7 +28,6 @@ void printMatrix(int *matrix, int matrixOrder) {
 }
 
 int *applyFilter(int *matrix, int matrixOrder, int cursorSize) {
-
     // Error Handling e malloc
     int *blurredMatrix = (int *)malloc(matrixOrder * matrixOrder * sizeof(int));
     if (blurredMatrix == NULL) return 0;
