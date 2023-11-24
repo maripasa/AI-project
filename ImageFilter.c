@@ -70,16 +70,20 @@ int *applyFilter(int *matrix, int matrixOrder, int cursorSize) {
 int main(){
 
     srand(time(NULL));
+	
+    int matrixOrder = 8;
+    int matrixCursorSize = 1;
+    int matrixMaxNumber = 257;
 
     // Gera matrix
-    int *matrix = createMatrix(5, 10);
-    printMatrix(matrix, 5);
+    int *matrix = createMatrix(matrixOrder, matrixMaxNumber);
+    printMatrix(matrix, matrixOrder);
 
     puts("");
 
     // Borra matrix
-    int *blurredMatrix = applyFilter(matrix, 5, 1);
-    printMatrix(blurredMatrix, 5);
+    int *blurredMatrix = applyFilter(matrix, matrixOrder, matrixCursorSize);
+    printMatrix(blurredMatrix, matrixOrder);
 
     // Free
     free(matrix);
