@@ -1,46 +1,88 @@
 #include <stdio.h>
+#include <string.h>
 #include <dirent.h>
-#include "PGM_operations.h"
+#include <stdlib.h>
+#include "PGM_Operations/PGM_Operations.h"
 
-int *applyFilter(int *matrix, int matrixOrder, int cursorSize);
-int *computeSCM(int *matrix1, int *matrix2, int matrixOrder, int levels);
-int *quantizeMatrix(int *matrix, int matrixOrder, int levels);
+#define MAX_PATH_LENGTH 512
+
+unsigned char *applyFilter(unsigned char *pData, int columns, int rows, int cursorSize);
+/*int *quantizeMatrix(int *pData, int columns, int rows, int levels);
+int *computeSCM(int *pData, int *matrix2, int columns, int rows, int levels, int maxPixelValue);*/
 
 int main(int argc, char *argv[]){
 
-    if (argc < 3) {
-        printf("Usage: %s <FilterSize> <Quantization>\n", argv[0]);
-        return 1; // Return an error code
+    if (argc < 5) {
+        printf("Usage: %s <CursorFilterSize> <InputFolder> <OutputFolder> <Quantization>\n", argv[0]);
+        return 1;
     }
 
-    struct pgm img;
+    int cursorFilterSize = atoi(argv[1]);
+    const char *inputDirectory = argv[2];
+    const char *outputDirectory = argv[3];
+    int quantization = atoi(argv[4]);
 
-    DIR *d;
-    struct dirent *dir;
-    d = opendir("./images");
-    if (d)
-    {
-        while ((dir = readdir(d)) != NULL)
-        {
+    if (cursorFilterSize == 0 && argv[1][0] != '0') {
+        printf("Error: Invalid input for CursorFilterSize.\n");
+        return 2;
+    }
 
+    if (quantization == 0 && argv[4][0] != '0') {
+        printf("Error: Invalid input for Quantization.\n");
+        return 2;
+    }
 
+    DIR *dir = opendir(inputDirectory);
 
+    if (dir == NULL) {
+        printf("Error: Couldn't open the directory.\n");
+        return 3;
+    }
+
+    struct dirent *entry;
+    
+    if (dir) {
+        while ((entry = readdir(dir)) != NULL) {
+            
+            char filepath[MAX_PATH_LENGTH];
+            char outputFilepath[MAX_PATH_LENGTH];
+
+            snprintf(filepath, sizeof(filepath), "%s/%s", inputDirectory, entry->d_name);
+            snprintf(outputFilepath, sizeof(outputFilepath), "%s/blurred_%s", outputDirectory, entry->d_name);
+            
+            struct pgm img;
+
+            readPGMImage(&img,filepath);
+
+            unsigned char *blurredData = applyFilter(img.pData, img.c, img.r, cursorFilterSize);
+
+            struct pgm blurredImg;
+            blurredImg.tipo = img.tipo;
+            blurredImg.c = img.c;
+            blurredImg.r = img.r;
+            blurredImg.mv = img.mv;
+            blurredImg.pData = blurredData;
+
+            writePGMImage(&blurredImg, outputFilepath);
+
+            free(img.pData);
+            free(blurredData);
+            
         }
     }
 
-    closedir(d);
+    closedir(dir);
     return 0;
-
 }
 
-int *applyFilter(int *matrix, int matrixOrder, int cursorSize) {
+unsigned char *applyFilter(unsigned char *pData, int columns, int rows, int cursorSize) {
     // Error Handling e malloc
-    int *blurredMatrix = (int *)malloc(matrixOrder * matrixOrder * sizeof(int));
-    if (blurredMatrix == NULL) return 0;
+    unsigned char *blurredData = (unsigned char *)malloc(columns * rows * sizeof(unsigned char));
+    if (blurredData == NULL) return NULL;
 
     // Itera pela matrix
-    for (int i = 0 ; i < matrixOrder ; i++) {
-        for (int j = 0 ; j < matrixOrder ; j++) {
+    for (int i = 0 ; i < rows ; i++) {
+        for (int j = 0 ; j < columns ; j++) {
             int sum = 0;
             int count = 0;
 
@@ -54,8 +96,8 @@ int *applyFilter(int *matrix, int matrixOrder, int cursorSize) {
                     int nj = j + y;
 
                     // Checa se os valores estão dentro da matrix
-                    if (ni >= 0 && ni < matrixOrder && nj >= 0 && nj < matrixOrder ) {
-                        sum += matrix[ni * matrixOrder + nj];
+                    if (ni >= 0 && ni < rows && nj >= 0 && nj < columns ) {
+                        sum += pData[ni * columns + nj];
                     }
 
                     count++;
@@ -64,19 +106,20 @@ int *applyFilter(int *matrix, int matrixOrder, int cursorSize) {
             }
 
             // media
-            blurredMatrix[i * matrixOrder + j] = sum / count;
+            blurredData[i * columns + j] = (unsigned char)sum / count;
 
         }
     }
 
-    return blurredMatrix;
+    return blurredData;
 
 }   
 
-int *quantizeMatrix(int *matrix, int matrixOrder, int levels) {
+/*
+int *quantizeMatrix(int *pData, int columns, int rows, int levels) {
 
     int *quantizedMatrix = (int *)malloc(matrixOrder * matrixOrder * sizeof(int));
-    if (quantizedMatrix == NULL) return 0;
+    if (quantizedMatrix == NULL) return 5;
 
     // Quantization logic for each pixel value
     for (int i = 0; i < matrixOrder * matrixOrder; i++) {
@@ -87,7 +130,7 @@ int *quantizeMatrix(int *matrix, int matrixOrder, int levels) {
 
 }
 
-int *computeSCM(int *matrix1, int *matrix2, int matrixOrder, int levels) {
+int *computeSCM(int *pData, int *matrix2, int columns, int rows, int levels, int maxPixelValue) {
     int *quantizedMatrix1 = quantizeMatrix(matrix1, matrixOrder, levels);
     int *quantizedMatrix2 = quantizeMatrix(matrix2, matrixOrder, levels);
 
@@ -105,3 +148,5 @@ int *computeSCM(int *matrix1, int *matrix2, int matrixOrder, int levels) {
 
     return scmMatrix;
 }
+
+*/
