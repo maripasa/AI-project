@@ -24,6 +24,6 @@ The **PatternExtractor** project has as main contributors:
 - [@maripasa](https://github.com/maripasa)
 - [@Kaiserg3](https://github.com/Kaiserg3)
 - [@Lucasholanda5](https://github.com/Lucasholanda5)
-- [@rafri42100](https://github.com/rafri41200)
+- [@rafri41200](https://github.com/rafri41200)
 
 ![266834128-c75a6f3b-ce18-48c7-908e-8efe5aa9c254](https://github.com/maripasa/PatternExtractor/assets/123270648/be891264-39b2-4ff1-9551-bb95f52ce82c)
