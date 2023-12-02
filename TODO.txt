@@ -1,0 +1,9 @@
+Things that are in need to be done
+
+Todo:
+- Make the comments better
+Comments are escarse and in different languages
+- Reform the SCM functions
+Functions have too many arguments
+- Check for optimizations in speed
+- Learn and teach team how Weka works
