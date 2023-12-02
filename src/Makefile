@@ -4,7 +4,7 @@
 
 # make
 # make PGM_Operations.o
-# make SCM_Extractor
+# make SCM_Extractor.exe
 # make clean
 
 # Compiler
@@ -21,7 +21,7 @@ EXE_DIR = ..
 # Source files
 SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
 PGM_OBJS = $(BUILD_DIR)/PGM_Operations/PGM_Operations.o
-EXE_NAME = $(EXE_DIR)/SCM_Extractor
+EXE_NAME = $(EXE_DIR)/SCM_Extractor.exe
 
 # Targets
 all: $(EXE_NAME)
