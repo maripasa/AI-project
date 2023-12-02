@@ -7,8 +7,8 @@
 #define MAX_PATH_LENGTH 512
 
 unsigned char *applyFilter(unsigned char *pData, int columns, int rows, int cursorSize);
-/*int *quantizeMatrix(int *pData, int columns, int rows, int levels);
-int *computeSCM(int *pData, int *matrix2, int columns, int rows, int levels, int maxPixelValue);*/
+int *quantizeData(int *pData, int columns, int rows, int levels, int maxPixelValue);
+int *computeSCM(int *pData, int *matrix2, int columns, int rows, int levels);
 
 int main(int argc, char *argv[]){
 
@@ -56,15 +56,6 @@ int main(int argc, char *argv[]){
 
             unsigned char *blurredData = applyFilter(img.pData, img.c, img.r, cursorFilterSize);
 
-            struct pgm blurredImg;
-            blurredImg.tipo = img.tipo;
-            blurredImg.c = img.c;
-            blurredImg.r = img.r;
-            blurredImg.mv = img.mv;
-            blurredImg.pData = blurredData;
-
-            writePGMImage(&blurredImg, outputFilepath);
-
             free(img.pData);
             free(blurredData);
             
@@ -76,70 +67,70 @@ int main(int argc, char *argv[]){
 }
 
 unsigned char *applyFilter(unsigned char *pData, int columns, int rows, int cursorSize) {
-    // Error Handling e malloc
+    // Error Handling and malloc
     unsigned char *blurredData = (unsigned char *)malloc(columns * rows * sizeof(unsigned char));
     if (blurredData == NULL) return NULL;
 
     // Itera pela matrix
-    for (int i = 0 ; i < rows ; i++) {
-        for (int j = 0 ; j < columns ; j++) {
-            int sum = 0;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < columns; j++) {
+            float sum = 0.0;  // Change to float for more accurate average
             int count = 0;
 
             // Itera pelos vizinhos selecionados pelo tamanho do vetor
             // cursorSize é a distancia das bordas partindo do centro,
             // Ex.: cursor 3x3 seria de tamanho 1
-            for (int x = -cursorSize ; x <= cursorSize ; x++) {
-                for (int y = -cursorSize ; y <= cursorSize ; y++) {
-
+            for (int x = -cursorSize; x <= cursorSize; x++) {
+                for (int y = -cursorSize; y <= cursorSize; y++) {
                     int ni = i + x;
                     int nj = j + y;
 
                     // Checa se os valores estão dentro da matrix
-                    if (ni >= 0 && ni < rows && nj >= 0 && nj < columns ) {
+                    if (ni >= 0 && ni < rows && nj >= 0 && nj < columns) {
                         sum += pData[ni * columns + nj];
+                        count++;
                     }
-
-                    count++;
-
                 }
             }
 
-            // media
-            blurredData[i * columns + j] = (unsigned char)sum / count;
-
+            // Avoid division by zero
+            if (count > 0) {
+                // media
+                blurredData[i * columns + j] = (unsigned char)(sum / count);
+            } else {
+                // Handle the case where count is zero (division by zero)
+                blurredData[i * columns + j] = pData[i * columns + j];
+            }
         }
     }
 
     return blurredData;
+}
 
-}   
+int *quantizeData(int *pData, int columns, int rows, int levels, int maxPixelValue) {
 
-/*
-int *quantizeMatrix(int *pData, int columns, int rows, int levels) {
-
-    int *quantizedMatrix = (int *)malloc(matrixOrder * matrixOrder * sizeof(int));
-    if (quantizedMatrix == NULL) return 5;
+    int *quantizedData = (int *)malloc(columns * rows * sizeof(int));
+    if (quantizedData == NULL) return 5;
 
     // Quantization logic for each pixel value
-    for (int i = 0; i < matrixOrder * matrixOrder; i++) {
-        quantizedMatrix[i] = (int)(((float)matrix[i] / 256) * levels);
+    for (int i = 0; i < columns * rows; i++) {
+        quantizedData[i] = (int)(((float)pData[i] / maxPixelValue) * levels);
     }
 
-    return quantizedMatrix;
+    return quantizedData;
 
 }
 
-int *computeSCM(int *pData, int *matrix2, int columns, int rows, int levels, int maxPixelValue) {
-    int *quantizedMatrix1 = quantizeMatrix(matrix1, matrixOrder, levels);
-    int *quantizedMatrix2 = quantizeMatrix(matrix2, matrixOrder, levels);
+int *computeSCM(int *pData, int *blurredData, int columns, int rows, int levels) {
+    int *quantizedMatrix1 = quantizeMatrix(pData, columns, rows, levels);
+    int *quantizedMatrix2 = quantizeMatrix(blurredData, columns, rows, levels);
 
-    int *scmMatrix = (int *)calloc((levels + 1) * (levels + 1), sizeof(int));
+    unsigned char *scmMatrix = (unsigned char *)calloc((levels + 1) * (levels + 1), sizeof(unsigned char));
     if (scmMatrix == NULL) return 0;
 
-    for (int i = 0; i < matrixOrder; i++) {
-        for (int j = 0; j < matrixOrder; j++) {
-            scmMatrix[quantizedMatrix1[i * matrixOrder + j] * (levels + 1) + quantizedMatrix2[i * matrixOrder + j]]++;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < columns; j++) {
+            scmMatrix[quantizedMatrix1[i * columns + j] * (levels + 1) + quantizedMatrix2[i * columns + j]]++;
         }
     }
 
@@ -148,5 +139,3 @@ int *computeSCM(int *pData, int *matrix2, int columns, int rows, int levels, int
 
     return scmMatrix;
 }
-
-*/
