@@ -1,36 +1,8 @@
+// PGM_operations.c
+
 #include <stdio.h>
 #include <stdlib.h>
-
-struct pgm{
-	int tipo;
-	int c;
-	int r;
-	int mv;
-	unsigned char *pData;
-};
-
-void readPGMImage(struct pgm *, char *);
-void viewPGMImage(struct pgm *);
-void writePGMImage(struct pgm *, char *);
-
-int main(int argc, char *argv[]){
-
-	struct pgm img;
-
-	if (argc!=3){
-		printf("Formato: \n\t %s <imagemEntrada.pgm> <imagemSaida.pgm>\n",argv[0]);
-		exit(1);
-	}
-
-	readPGMImage(&img,argv[1]);
-
-	writePGMImage(&img, argv[2]);
-
-	viewPGMImage(&img);
-
-	return 0;
-
-}
+#include "pgm_operations.h"
 
 void readPGMImage(struct pgm *pio, char *filename){
 
@@ -104,7 +76,6 @@ void writePGMImage(struct pgm *pio, char *filename){
 	fclose(fp);
 
 }
-
 
 void viewPGMImage(struct pgm *pio){
 	printf("Tipo: %d\n",pio->tipo);

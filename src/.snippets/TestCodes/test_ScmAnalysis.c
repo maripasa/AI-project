@@ -10,28 +10,6 @@ int *computeSCM(int *matrix1, int *matrix2, int matrixOrder, int levels);
 
 int main(){
 
-    srand(time(NULL));
-
-
-    // Gera matrix
-    //orig
-    int matrix1[36] = {4,3,2,1,1,1,5,3,3,2,1,5,4,3,2,1,0,4,4,3,3,0,1,3,3,3,3,2,3,2,4,6,7,5,7,7};
-    //filtr
-    int matrix2[36] = {3,2,2,1,0,0,5,3,4,1,2,5,4,2,2,2,0,4,5,2,3,0,1,3,3,3,3,2,3,2,4,7,7,5,7,7};
-    int *scmMatrix = computeSCM(matrix1, matrix2, 6, 7);
-
-    
-    
-    printMatrix(matrix1, 6);
-
-    puts("");
-
-    printMatrix(matrix2, 6);
-
-    puts("");
-
-    printMatrix(scmMatrix, 8);
-
     return 0;
 
 }
