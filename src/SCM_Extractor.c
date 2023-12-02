@@ -8,32 +8,41 @@
 
 unsigned char *applyFilter(unsigned char *pData, int columns, int rows, int cursorSize);
 int *quantizeData(int *pData, int columns, int rows, int levels, int maxPixelValue);
-int *computeSCM(int *pData, int *matrix2, int columns, int rows, int levels);
+int *computeSCM(int *pData, int *blurredData, int columns, int rows, int levels);
+int extractLabelFromFilename(const char *filename);
 
 int main(int argc, char *argv[]){
 
     if (argc < 5) {
-        printf("Usage: %s <CursorFilterSize> <InputFolder> <OutputFolder> <Quantization>\n", argv[0]);
+        printf("Usage: %s <CursorFilterSize> <InputDirectory> <OutputDirectory> <QuantizationLevels>\n", argv[0]);
         return 1;
     }
 
     int cursorFilterSize = atoi(argv[1]);
     const char *inputDirectory = argv[2];
     const char *outputDirectory = argv[3];
-    int quantization = atoi(argv[4]);
+    int quantizationLevels = atoi(argv[4]);
 
     if (cursorFilterSize == 0 && argv[1][0] != '0') {
         printf("Error: Invalid input for CursorFilterSize.\n");
         return 2;
     }
 
-    if (quantization == 0 && argv[4][0] != '0') {
+    if (quantizationLevels == 0 && argv[4][0] != '0') {
         printf("Error: Invalid input for Quantization.\n");
         return 2;
     }
 
-    DIR *dir = opendir(inputDirectory);
+    char outputFilename[MAX_PATH_LENGTH];
+    snprintf(outputFilename, sizeof(outputFilename), "%s/features_%d_%d.txt", outputDirectory, cursorFilterSize, quantizationLevels);
 
+    FILE *featureFile = fopen(outputFilename, "w");
+    if (featureFile == NULL) {
+        printf("Error: Couldn't open the combined feature file.\n");
+        return 4;
+    }
+
+    DIR *dir = opendir(inputDirectory);
     if (dir == NULL) {
         printf("Error: Couldn't open the directory.\n");
         return 3;
@@ -42,28 +51,45 @@ int main(int argc, char *argv[]){
     struct dirent *entry;
     
     if (dir) {
+
         while ((entry = readdir(dir)) != NULL) {
             
             char filepath[MAX_PATH_LENGTH];
             char outputFilepath[MAX_PATH_LENGTH];
 
             snprintf(filepath, sizeof(filepath), "%s/%s", inputDirectory, entry->d_name);
-            snprintf(outputFilepath, sizeof(outputFilepath), "%s/blurred_%s", outputDirectory, entry->d_name);
             
             struct pgm img;
-
             readPGMImage(&img,filepath);
 
-            unsigned char *blurredData = applyFilter(img.pData, img.c, img.r, cursorFilterSize);
+            unsigned int *blurredData = applyFilter(img.pData, img.c, img.r, cursorFilterSize);
+            unsigned int *scmMatrix = computeSCM(img.pData, blurredData, img.c, img.r, quantizationLevels);
+
+            for (int i = 0; i <= quantizationLevels; i++) {
+                for (int j = 0; j <= quantizationLevels; j++) {
+                    fprintf(featureFile, "%d, ", scmMatrix[i * (quantizationLevels + 1) + j]);
+                }
+            }
+
+            // Adicionar o rótulo no final do vetor
+            int label = extractLabelFromFilename(entry->d_name);
+            fprintf(featureFile, "%d\n", label);
 
             free(img.pData);
             free(blurredData);
+            free(scmMatrix);
             
         }
     }
 
     closedir(dir);
     return 0;
+}
+
+int extractLabelFromFilename(const char *filename) {
+    int label;
+    sscanf(filename, "%d_", &label);
+    return label;
 }
 
 unsigned char *applyFilter(unsigned char *pData, int columns, int rows, int cursorSize) {
