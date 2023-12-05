@@ -55,7 +55,6 @@ int main(int argc, char *argv[]){
         while ((entry = readdir(dir)) != NULL) {
             
             char filepath[MAX_PATH_LENGTH];
-
             snprintf(filepath, sizeof(filepath), "%s/%s", inputDirectory, entry->d_name);
             
             struct pgm img;
@@ -81,6 +80,7 @@ int main(int argc, char *argv[]){
         }
     }
 
+    fclose(featureFile);
     closedir(dir);
     return 0;
 }
@@ -113,8 +113,9 @@ unsigned char *applyFilter(unsigned char *pData, int columns, int rows, int curs
                     // Checa se os valores estão dentro da matrix
                     if (ni >= 0 && ni < rows && nj >= 0 && nj < columns) {
                         sum += pData[ni * columns + nj];
-                        count++;
                     }
+
+                    count++;
                 }
             }
 
@@ -150,12 +151,12 @@ unsigned char *computeSCM(unsigned char *pData, unsigned char *blurredData, int 
     unsigned char *quantizedData1 = quantizeData(pData, columns, rows, levels, maxPixelValue);
     unsigned char *quantizedData2 = quantizeData(blurredData, columns, rows, levels, maxPixelValue);
 
-    unsigned char *scmMatrix = (unsigned char *)calloc((levels + 1) * (levels + 1), sizeof(unsigned char));
+    unsigned char *scmMatrix = (unsigned char *)calloc((levels) * (levels), sizeof(unsigned char));
     if (scmMatrix == NULL) return 0;
 
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < columns; j++) {
-            scmMatrix[quantizedData1[i * columns + j] * (levels + 1) + quantizedData2[i * columns + j]]++;
+            scmMatrix[quantizedData1[i * columns + j] * (levels) + quantizedData2[i * columns + j]]++;
         }
     }
 

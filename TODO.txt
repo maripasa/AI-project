@@ -7,3 +7,5 @@ Comments are escarse and in different languages
 Functions have too many arguments
 - Check for optimizations in speed
 - Learn and teach team how Weka works
+- Checar .h pra ver se precisa das precompilação
+- deixar makefile burra
