@@ -2,7 +2,7 @@
 #include <string.h>
 #include <dirent.h>
 #include <stdlib.h>
-#include "PGM_Operations/PGM_Operations.h"
+#include "../include/PGM_Operations.h"
 
 #define MAX_PATH_LENGTH 512
 

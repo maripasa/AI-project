@@ -1,4 +1,4 @@
-// PGM_operations.h
+// PGM_Operations.h
 
 #ifndef PGM_OPERATIONS_H
 #define PGM_OPERATIONS_H

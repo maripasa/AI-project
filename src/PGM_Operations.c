@@ -2,14 +2,14 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "PGM_Operations.h"
+#include "../include/PGM_Operations.h"
 
 void readPGMImage(struct pgm *pio, char *filename){
 
 	FILE *fp;
 	char ch;
 
-	if (!(fp = fopen(filename,"r"))){
+	if (!(fp = fopen(filename,"rb"))){
 		perror("Erro.");
 		exit(1);
 	}
