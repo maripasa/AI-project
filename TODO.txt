@@ -1,14 +1,11 @@
-Things that are in need to be done
+! -> Importante
+? -> Opcional
+* -> Iniciada
 
 Todo:
-- Make the comments better
-Comments are escarse and in different languages
-- Reform the SCM functions
-Functions have too many arguments
-- Check for optimizations in speed
-- Learn and teach team how Weka works
-- Checar .h pra ver se precisa das precompilação
-- deixar makefile burra
 
-- Relatório
-- README melhorado com tutorial de execução
+- !* Reformar Funções
+- ? Checar por otimizações em velocidade
+- !! Aprender como o Weka funciona
+
+- !!! Relatório

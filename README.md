@@ -7,7 +7,6 @@ Welcome to the **PatternExtractor** project, organized by **Professor Daniel Fer
 ## Overview
 The **PatternExtractor** project is a part of the Programming Lab for the second semester of 2023. The goal of this project is to develop an AI-based solution for extracting and analyzing patterns from datasets.
 
-# Project Description
 ## Purpose
 The primary objective of **PatternExtractor** is to create a tool that can automatically identify and extract meaningful patterns from medical datasets.
 
@@ -16,6 +15,57 @@ The primary objective of **PatternExtractor** is to create a tool that can autom
 We will be using mainly C and Weka.
 
 Weka is an open-source software suite designed for data mining and machine learning tasks developed at the University of Waikato, New Zealand.
+
+More about it in here: [WEKA](https://www.cs.waikato.ac.nz/ml/weka/index.html)
+
+## Code Execution
+
+### Prerequisites
+
+Ensure you have the following prerequisites installed on your system:
+
+- Linux is recommended.
+
+### Running the Code
+
+Follow these steps to execute the code:
+
+- **Step 1:** Clone the repository to your local machine.
+
+    ```bash
+    git clone https://github.com/maripasa/PatternExtractor.git
+    ```
+
+- **Step 2:** Navigate to the project directory.
+
+    ```bash
+    cd PatternExtractor
+    ```
+   
+- **Step 3:** Run the program.
+
+    ```bash
+    # Example command to run SCM_Extractor
+    ./bin/SCM_Extractor.exe <CursorFilterSize> <InputDirectory> <OutputDirectory> <QuantizationLevels>
+    ```
+
+### Troubleshooting
+
+If you encounter any issues during execution, consider the following:
+
+- Recompile using Makefile for maximum compatibility.
+
+    For Unix:
+    ```bash
+    make clean-unix
+    make
+    ```
+    For Windows:
+    ```bash
+    make clean-windows
+    make
+    ```
+
 
 ## Contributors
 
