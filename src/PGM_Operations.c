@@ -1,4 +1,4 @@
-// PGM_operations.c
+// PGM_Operations.c
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,13 +9,13 @@ void readPGMImage(struct pgm *pio, char *filename){
 	FILE *fp;
 	char ch;
 
-	if (!(fp = fopen(filename,"rb"))){
+	if (!(fp = fopen(filename,"r"))){
 		perror("Erro.");
 		exit(1);
 	}
 
 	if ( (ch = getc(fp))!='P'){
-		puts("A imagem fornecida não está no formato pgm");
+		printf("Erro: O arquivo '%s' não está no formato pgm (primeiro caractere é '%c', mas 'P' era esperado.)", filename, ch);
 		exit(2);
 	}
 	

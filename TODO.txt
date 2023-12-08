@@ -9,3 +9,6 @@ Functions have too many arguments
 - Learn and teach team how Weka works
 - Checar .h pra ver se precisa das precompilação
 - deixar makefile burra
+
+- Relatório
+- README melhorado com tutorial de execução
