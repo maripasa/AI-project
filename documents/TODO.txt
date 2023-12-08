@@ -1,0 +1,20 @@
+! -> Importante
+? -> Opcional
+* -> Iniciada
+
+Todo:
+
+- !* Reformar Funções
+- ? Checar por otimizações em velocidade
+- !! Aprender como o Weka funciona
+
+- !!! Relatório
+
+Duvidas:
+
+- Sobre a formatação do txt, "termina em stroma ou em 1?" "É o primeiro numero mesmo?"
+- O Weka utiliza csv para treinar os dados, como cria o csv? Como eu uso o weka
+- Sobre os cabeçários, eles devem ser do criador do arquvivo em específico ou os nomes de
+toda a equipe?
+- Sobre "Para fins de revisão do professor, salve em um arquivo a ordem de processamento das imagens. Organize
+a sequência de processamento colocando o nome de cada imagem por linha (inclua a extensão)."
