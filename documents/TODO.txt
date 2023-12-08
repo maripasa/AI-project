@@ -13,8 +13,29 @@ Todo:
 Duvidas:
 
 - Sobre a formatação do txt, "termina em stroma ou em 1?" "É o primeiro numero mesmo?"
+R: Palavras stroma e epithelium
+
 - O Weka utiliza csv para treinar os dados, como cria o csv? Como eu uso o weka
+R: So salvar
+R: Primeira linha numerar as colunas:
+primeira linha numera as colunas
+1,2,3,4,5,6,7,...,65
+
 - Sobre os cabeçários, eles devem ser do criador do arquvivo em específico ou os nomes de
 toda a equipe?
+R: equipe inteira
+
 - Sobre "Para fins de revisão do professor, salve em um arquivo a ordem de processamento das imagens. Organize
 a sequência de processamento colocando o nome de cada imagem por linha (inclua a extensão)."
+R:  txt com os nomes
+
+- Pequena duvida sobre o counter++
+R:no
+
+- Como vai ser a contagem da velocidade? Sera testado em windows ou unix?
+R: Utilizando ttime, colar acima do while
+
+Obs: Ao loadar o arquivo no weka
+FIlter -> Balanciamento (Class balance) vai balancear a diferenca de classes
+
+fseek problema windows
