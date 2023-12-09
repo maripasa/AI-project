@@ -46,7 +46,7 @@ Siga estas etapas para executar o código:
 
     ```bash
     # Exemplo de comando para executar o SCM_Extractor
-    ./bin/SCM_Extractor.exe <RaioCursor> <DiretórioInput> <DiretórioOutput> <nivelQuantização>
+    ./bin/SCM_Extractor.exe <RaioCursor> <nivelQuantização> <DiretórioInput> <DiretórioOutput>
     ```
 
 ### Solução de Problemas

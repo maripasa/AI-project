@@ -46,7 +46,7 @@ Follow these steps to execute the code:
 
     ```bash
     # Example command to run SCM_Extractor
-    ./bin/SCM_Extractor.exe <CursorFilterSize> <InputDirectory> <OutputDirectory> <QuantizationLevels>
+    ./bin/SCM_Extractor.exe <CursorFilterSize> <QuantizationLevels> <InputDirectory> <OutputDirectory>
     ```
 
 ### Troubleshooting

@@ -4,25 +4,12 @@
 #define QTDIMG 100
 
 int main(){
-	int k;
+	
 	clock_t begin, end;
 	double time_per_img, time_total=0;
-	long long int a = 999999999;
 
 	begin = clock();
 
-	for (k=0; k<QTDIMG; k++){
-
-		// Leitura
-
-		
-		while(a){
-			a--;
-		}
-
-		
-
-	}
 
 	end = clock();
 

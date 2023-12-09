@@ -27,6 +27,6 @@ obj/SCM_Util.o: ./src/SCM_Util.c ./include/SCM_Util.h
 
 # clean para unix e windows
 clean-unix:
-	rm -f obj/PGM_Operations.o obj/SCM_Util.o bin/SCM_Extractor
+	rm -f obj/PGM_Operations.o obj/SCM_Util.o bin/SCM_Extractor bin/SCM_Extractor.exe
 clean-windows:
-	del obj/PGM_Operations.o obj/SCM_Util.o bin/SCM_Extractor
+	del obj/PGM_Operations.o obj/SCM_Util.o bin/SCM_Extractor bin/SCM_Extractor.exe

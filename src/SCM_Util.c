@@ -1,5 +1,23 @@
 // SCM_Util
 
+/*************************************************************/
+/* Aluno 01: Ásafe Silva Duarte Ximenes Frota                */
+/* Matricula: 20231045050254                                 */
+/*                                                           */
+/* Aluno 02: Antonio Lucas Pereira Holanda                   */
+/* Matricula: 20231045050246                                 */
+/*                                                           */
+/* Aluno 03: João Pedro Ibiapina Portela Neime               */
+/* Matricula: 20231045050327                                 */
+/*                                                           */
+/* Aluno 04: Rafael Jorge Cabral Cardoso                     */
+/* Matricula: 20231045050181                                 */
+/*                                                           */
+/* Avaliação 04: Trabalho Final                              */
+/* 04.505.23 - 2023.2 - Prof. Daniel Ferreira                */
+/* Compilador: gcc.exe (Rev7, Built by MSYS2 project) 13.1.0 */
+/*************************************************************/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "../include/SCM_Util.h"
@@ -38,17 +56,12 @@ unsigned char *filterData(unsigned char *pData, int columns, int rows, int curso
 
             // Evita divisão por 0 e faz a média
             if (count > 0) {
-
                 blurredData[i * columns + j] = (unsigned char)(sum / count);
-
             } else {
-
                 blurredData[i * columns + j] = pData[i * columns + j];
-
             }
         }
     }
-
     return blurredData;
 }
 
@@ -87,16 +100,23 @@ unsigned char *computeSCM(unsigned char *Data1, unsigned char *Data2, int column
 void fprintSCM(FILE *file, unsigned char *scmMatrix, int quantizationLevels) {
 
     // Printa cada um dos valores dos dados da SCM
-    for (int i = 0; i <= quantizationLevels; i++) {
-        for (int j = 0; j <= quantizationLevels; j++) {
-            fprintf(file, "%d, ", scmMatrix[i * (quantizationLevels + 1) + j]);
+    for (int i = 0; i < quantizationLevels; i++) {
+        for (int j = 0; j < quantizationLevels; j++) {
+            fprintf(file, "%d, ", scmMatrix[i * (quantizationLevels) + j]);
         }
     }
+
 }
 
-int extractLabelSCM(const char *filename) {
+void extractLabelSCM(FILE *outputFile, const char *filename) {
     // Toma o label no final e escreve no final de cada linha de dados
     int label;
     sscanf(filename, "%d_", &label);
-    return label;
+
+    if (label) {
+        fprintf(outputFile, "stroma\n");
+    } else {
+        fprintf(outputFile, "epithelium\n");
+    }
+
 }

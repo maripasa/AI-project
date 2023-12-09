@@ -1,5 +1,23 @@
 // PGM_Operations.c
 
+/*************************************************************/
+/* Aluno 01: Ásafe Silva Duarte Ximenes Frota                */
+/* Matricula: 20231045050254                                 */
+/*                                                           */
+/* Aluno 02: Antonio Lucas Pereira Holanda                   */
+/* Matricula: 20231045050246                                 */
+/*                                                           */
+/* Aluno 03: João Pedro Ibiapina Portela Neime               */
+/* Matricula: 20231045050327                                 */
+/*                                                           */
+/* Aluno 04: Rafael Jorge Cabral Cardoso                     */
+/* Matricula: 20231045050181                                 */
+/*                                                           */
+/* Avaliação 04: Trabalho Final                              */
+/* 04.505.23 - 2023.2 - Prof. Daniel Ferreira                */
+/* Compilador: gcc.exe (Rev7, Built by MSYS2 project) 13.1.0 */
+/*************************************************************/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "../include/PGM_Operations.h"

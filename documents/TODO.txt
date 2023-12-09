@@ -8,11 +8,11 @@ Todo:
 Objetivas
 - XXX !!! Erro em quantizacoes menores
 - XXX ! Tornar arquivo .csv
-- ! Tornar label stroma e epithelium em vez de 0 ou 1
-- ! Criar a primeira linha que numera as colunas do feature file
-- ! Criar cabecarios para os arquivos
-- ! Criar txt paralelo com os nomes dos arquivos que foram lidos, com ordem
-- ! Implementar ttime.c
+- XXX ! Tornar label stroma e epithelium em vez de 0 ou 1
+- XXX ! Criar a primeira linha que numera as colunas do feature file
+- XXX !* Criar cabecarios para os arquivos
+- XXX ! Criar txt paralelo com os nomes dos arquivos que foram lidos, com ordem
+- XXX ! Implementar ttime.c
 
 Subjetivas	
 - !!! Relatório
