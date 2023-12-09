@@ -5,18 +5,20 @@ X -> Concluido
 
 Todo:
 
-- !* Reformar Funções
-- ? Checar por otimizações em velocidade
-- !!* Aprender como o Weka funciona
-- !!! Erro em quantizacoes menores
-- !* Tornar label stroma e epithelium em vez de 0 ou 1
+Objetivas
+- XXX !!! Erro em quantizacoes menores
+- XXX ! Tornar arquivo .csv
+- ! Tornar label stroma e epithelium em vez de 0 ou 1
 - ! Criar a primeira linha que numera as colunas do feature file
 - ! Criar cabecarios para os arquivos
 - ! Criar txt paralelo com os nomes dos arquivos que foram lidos, com ordem
 - ! Implementar ttime.c
 
+Subjetivas	
 - !!! Relatório
-
+- !* Reformar Funções
+- ? Checar por otimizações em velocidade
+- !!* Aprender como o Weka funciona
 
 Obs: Ao loadar o arquivo no weka
 FIlter -> Balanciamento (Class balance) vai balancear a diferenca de classes

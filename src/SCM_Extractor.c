@@ -1,3 +1,4 @@
+//SCM_Extractor.c
 #include <stdio.h>
 #include <string.h>
 #include <dirent.h>
@@ -88,10 +89,10 @@ int main(int argc, char *argv[]){
             fprintf(featureFile, "%d\n", label);
 
             // Free all data
-            free(quantizedData1);
-            free(quantizedData2);
             free(img.pData);
             free(blurredData);
+            free(quantizedData1);
+            free(quantizedData2);
             free(scmMatrix);
 
         }

@@ -56,12 +56,12 @@ unsigned char *filterData(unsigned char *pData, int columns, int rows, int curso
 unsigned char *quantizeData(unsigned char *pData, int columns, int rows, int levels, int maxPixelValue) {
 
     // Aloca ponteiro para os dados
-    unsigned char *quantizedData = (unsigned char*)malloc(columns * rows * sizeof(unsigned int));
+    unsigned char *quantizedData = (unsigned char*)malloc(columns * rows * sizeof(unsigned char));
     if (quantizedData == NULL) return NULL;
 
     // Quantiza cada pixel
     for (int i = 0; i < columns * rows; i++) {
-        quantizedData[i] = (unsigned int)(((float)pData[i] / maxPixelValue) * levels);
+        quantizedData[i] = (unsigned char)(((float)pData[i] / (maxPixelValue + 1)) * levels);
     }
 
     return quantizedData;
