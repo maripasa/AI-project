@@ -112,9 +112,10 @@ int main(int argc, char *argv[]){
             // Escreve em filepath o endereço da imagem atual
             char filepath[MAX_PATH_LENGTH];
             snprintf(filepath, sizeof(filepath), "%s/%s", inputDirectory, entry->d_name);
-
+            
             // Escreve o número do arquivo
             fprintf(nameList, "%d - %s\n", fileNumber, entry->d_name);
+            fileNumber++;
 
             // Cria um struct img e escreve nele os dados da imagem
             struct pgm img;

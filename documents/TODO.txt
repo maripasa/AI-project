@@ -15,12 +15,7 @@ Objetivas
 - XXX ! Implementar ttime.c
 
 Subjetivas	
-- !!! Relatório
+- XXX !!! Relatório
 - !* Reformar Funções
 - ? Checar por otimizações em velocidade
-- !!* Aprender como o Weka funciona
-
-Obs: Ao loadar o arquivo no weka
-FIlter -> Balanciamento (Class balance) vai balancear a diferenca de classes
-
-fseek problema windows
+- XXX !!* Aprender como o Weka funciona

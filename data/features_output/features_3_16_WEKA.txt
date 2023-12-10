@@ -1,0 +1,44 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.trees.RandomForest -P 100 -I 100 -num-slots 1 -K 0 -M 1.0 -V 0.001 -S 1
+Relation:     features_3_16-weka.filters.supervised.instance.ClassBalancer-num-intervals10
+Instances:    656
+Attributes:   257
+              [list of attributes omitted]
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+RandomForest
+
+Bagging with 100 iterations and base learner
+
+weka.classifiers.trees.RandomTree -K 0 -M 1.0 -V 0.001 -S 1 -do-not-check-capabilities
+
+Time taken to build model: 0.4 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         584.4038          89.0859 %
+Incorrectly Classified Instances        71.5962          10.9141 %
+Kappa statistic                          0.7817
+Mean absolute error                      0.234 
+Root mean squared error                  0.3026
+Relative absolute error                 46.8002 %
+Root relative squared error             60.5133 %
+Total Number of Instances              656     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0,895    0,113    0,888      0,895    0,891      0,782    0,956     0,959      epithelium
+                 0,887    0,105    0,894      0,887    0,890      0,782    0,956     0,952      stroma
+Weighted Avg.    0,891    0,109    0,891      0,891    0,891      0,782    0,956     0,955     
+
+=== Confusion Matrix ===
+
+   a      b      <-- classified as
+ 293.56  34.44 |      a =  epithelium
+  37.16 290.84 |      b =  stroma
+
