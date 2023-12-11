@@ -36,6 +36,9 @@ int main(int argc, char *argv[]){
 	double time_per_img, time_total = 0;
     int fileNumber = 1;
 
+    // Inicia o clock
+	begin = clock();
+    
     // Checa o uso correto dos argumentos
     if (argc < 5) {
         printf("Usage: %s <CursorFilterSize> <QuantizationLevels> <InputDirectory> <OutputDirectory>\n", argv[0]);
@@ -97,9 +100,6 @@ int main(int argc, char *argv[]){
     
     // Verifica se dir é nulo
     if (dir) {
-        
-        // Inicia o clock
-	    begin = clock();
         
         // Itera por todos os itens do diretório
         while ((entry = readdir(dir)) != NULL) {

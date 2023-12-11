@@ -1,6 +1,6 @@
 # PatternExtractor - Programming Lab 2023-2
 
-_Read this in other languages: [English](README.md), [Português](README.br.md)._
+_Read this in other languages: [English](README.en.md), [Português](README.md)._
 
 Welcome to the **PatternExtractor** project, organized by **Professor Daniel Ferreira at IFCE**.
 
@@ -66,6 +66,33 @@ If you encounter any issues during execution, consider the following:
     make
     ```
 
+## File Organization
+
+### PatternExtractor
+- **`/bin`**: Source code files
+
+- **`/data`**: Dataset files and output files
+  - `/features_output`: Features output
+  - `/oncotex_pgm`: PGM images dataset
+
+- **`/demos`**: Not main code related files files
+  - `/snippets`: Teacher's original codes
+  - `/tests`: Old small tests
+
+- **`/docs`**: Test files and suites
+  - `FinalProject.pdf`: Project instructions
+  - `RelatorioFinal.docx`: Final report docx
+  - `RelatorioFinal.pdf`: Final report pdf 
+
+- **`/include`**: Header files
+
+- **`/obj`**: Compiled object files
+
+- **`/src`**: Source code
+
+- **`README.en.md`**: English README
+
+- **`README.md`**: Portuguese README
 
 ## Contributors
 
